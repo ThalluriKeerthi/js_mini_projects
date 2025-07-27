@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Age Calculator</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        .container{
+            height: 100vh;
+            width: 100%;
+            background: rgb(180, 133, 224);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding-top: 160px;
+            padding-left: 25px;
+        }
+        .container h2{
+            color: white;
+        }
+        .container h3{
+            color: rgb(241, 241, 75);
+        }
+        #intake{
+            background-color: rgb(201, 183, 183);
+            width: 378px;
+            height: 45px;
+            margin-top: 20px;
+           padding-left: 20px;
+           padding-top: 8px;
+          
+        }
+        #fill{
+            height: 28px;
+            width: 200px;
+            outline: none;
+            border: none;
+
+        }
+        #btn0{
+            outline: none;
+            border: none;
+            height:28px;
+            margin-left: 10px;
+            width: 100px;
+            color: black;
+            font-weight: 700;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: rgb(248, 248, 84);
+        }
+        #btn0:hover{
+            background:rgb(251, 251, 160) ;
+        }
+        #res{
+            font-weight: 700;
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            margin-top: 50px;
+        }
+
+    </style>
+  </head>
+  <body>
+   <main>
+    <div class="container">
+       <h2>Javascript</h2>
+       <h3>Age Calculator</h3>
+       <div id="intake">
+        <input type="date" id="fill" placeholder=""/>
+        <button id="btn0" onclick="calculateage()">Calculate</button>
+       </div>
+       <p id="res"></p>
+    </div>
+   </main>
+  </body>
+  <script type="text/javascript">
+    let inputdata=document.getElementById("fill");
+    inputdata.max=new Date().toISOString().split("T")[0];
+   // console.log(inputdata.max);
+    function calculateage(){
+   let userdate=new Date(inputdata.value);
+  // console.log(todaydate);
+      let d1=userdate.getDate();
+      let m1=userdate.getMonth();
+      let y1=userdate.getFullYear();
+
+      let today=new Date();
+
+      let d2=today.getDate();
+      let m2=today.getMonth();
+      let y2=today.getFullYear();
+
+      //d2 is present
+      let finmon;
+      let finday;
+      if(m2<m1){
+        y2--;
+        m2+=12;
+         finmon=m2-m1;
+      }
+      else{
+        finmon=m2-m1;
+      }
+
+      if(d2<d1){
+        if(m2==2||m2==4||m2==6||m2==8||m2==9||m2==11){
+            m2--;
+            d2+=31;
+              finday=d2-d1;
+        }
+     else if(m2==5||m2==7||m2==10||m2==12){
+            m2--;
+            d2+=30;
+              finday=d2-d1;
+        }
+        else if(m2==3){
+            m2--;
+            if(y2%4==0&&y2%400==0||y2%100!=0){
+            d2+=29;
+            finday=d2-d1;
+            }
+            else{
+                d2+=28;
+                finday=d2-d1;   
+            }
+        }
+
+      }
+      else{
+        finday=d2-d1;
+      }
+
+     let finyear;
+     finyear=y2-y1;
+
+
+document.getElementById("res").innerText=`you are ${finyear} years  ${finmon} months ${finday} days old`;
+
+    }
+    </script>
+</html>
