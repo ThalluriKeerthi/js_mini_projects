@@ -1,1 +1,1 @@
-# js_mini_projets
+# js_mini_projects
